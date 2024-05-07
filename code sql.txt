@@ -1,0 +1,95 @@
+Create Database Library
+Create table Login(
+username nvarchar(20),
+password nvarchar(20)
+)
+--------------//loginكود صفحه ال 
+insert into Login(username,password)values
+('Admin','123456')
+select * from Login
+------------------------------------------------
+Create procedure sp_login
+@username nvarchar(20),
+@password nvarchar(20)
+AS
+BEGIN
+	Select * from Login where username=@username
+	and password=@password
+END
+------------------------------------------------
+----------------//كود صفحه Add Book
+Create Table tbl_books(
+BookID INT IDENTITY(1,1),
+BookName NVarchar(30),
+AuthorName NVarchar(30),
+publication nvarchar(30),
+purchaseDate nvarchar(40),
+BookPrice Nvarchar(20),
+Quantity Nvarchar(30)
+)
+------------------------------------------------
+Create Procedure SP_add_books
+@BookName NVarchar(30),
+@AuthorName NVarchar(30),
+@publication nvarchar(30),
+@purchaseDate nvarchar(40),
+@BookPrice Nvarchar(20),
+@Quantity Nvarchar(30)
+AS
+BEGIN
+INSERT INTO tbl_books(
+BookName,AuthorName,publication,
+purchaseDate,BookPrice,Quantity)
+Values(
+@BookName,@AuthorName,@publication,
+@purchaseDate,@BookPrice,@Quantity
+)
+END
+------------------------------------------------
+--------------//View Books
+Create Procedure ViewBooks
+@BookName Nvarchar(30)
+AS
+BEGIN
+IF (@BookName = '')
+BEGIN
+select * from tbl_books
+END
+ELSE
+
+BEGIN
+select * from tbl_books Where BookName =@BookName
+END
+
+END
+-------------------------------------------------
+--------------------//ADD Students
+Create table students(
+Student_Name Nvarchar(20),
+Entrollment_Number Nvarchar(30),
+Department  Nvarchar(30),
+contact Nvarchar(20),
+Email Nvarchar(30),
+Semester Nvarchar(20)
+)
+
+
+
+
+create procedure sp_addStudents
+@Student_Name Nvarchar(20),
+@Entrollment_Number Nvarchar(30),
+@Department  Nvarchar(30),
+@contact Nvarchar(20),
+@Email Nvarchar(30),
+@Semester Nvarchar(20)
+AS
+BEGIN
+INSERT INTO students(Student_Name,
+Entrollment_Number,Department,
+contact,Email,Semester)
+VALUES 
+(@Student_Name,
+@Entrollment_Number,@Department,
+@contact,@Email,@Semester)
+END

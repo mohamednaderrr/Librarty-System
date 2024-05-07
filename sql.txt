@@ -1,0 +1,95 @@
+//عبدالله مصطفي عبد الحليم السيد تمراز
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+Node* front = nullptr;
+Node* rear = nullptr;
+
+
+void insert() {
+    int val;
+    cout << "Insert the element in the queue: ";
+    cin >> val;
+
+    Node* newNode = new Node;
+    newNode->data = val;
+    newNode->next = nullptr;
+
+    if (rear == nullptr) {
+        front = rear = newNode;
+    }
+    else {
+        rear->next = newNode;
+        rear = newNode;
+    }
+
+    cout << "Element inserted in the queue." << endl;
+}
+
+void Delete() {
+    if (front == nullptr) {
+        cout << "Queue underflow." << endl;
+        return;
+    }
+
+    Node* temp = front;
+    front = front->next;
+
+    if (front == nullptr) {
+        rear = nullptr;
+    }
+
+    cout << "Element deleted from the queue is: " << temp->data << endl;
+    delete temp;
+}
+
+void Display() {
+    if (front == nullptr) {
+        cout << "Queue is empty." << endl;
+    }
+    else {
+        cout << "Queue elements are: " << endl;
+        Node* current = front;
+        while (current != nullptr) {
+            cout << current->data << endl;
+            current = current->next;
+        }
+    }
+}
+
+int main() {
+    int ch;
+    cout << "1) Insert element to queue" << endl;
+    cout << "2) Delete element from queue" << endl;
+    cout << "3) Display elements in the queue" << endl;
+    cout << "4) Exit" << endl;
+
+    do {
+        cout << "Enter your choice: ";
+        cin >> ch;
+
+        switch (ch) {
+        case 1:
+            insert();
+            break;
+        case 2:
+            Delete();
+            break;
+        case 3:
+            Display();
+            break;
+        case 4:
+            cout << "Exit" << endl;
+            break;
+        default:
+            cout << "Invalid choice" << endl;
+        }
+    } while (ch != 4);
+
+    return 0;
+}
